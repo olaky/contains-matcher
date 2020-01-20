@@ -1,9 +1,11 @@
+import re
+
 def contains(data, pattern):
     if pattern == []:
         return True
     elif isinstance(data, list):
         for elem in data:
-            if (__matches(elem, pattern[0]) and contains(elem, pattern[1:])) or contains(elem, pattern):
+            if contains(elem, pattern):
                 return True
     elif isinstance(data, dict):
         for key in data.keys():
@@ -18,6 +20,11 @@ def contains(data, pattern):
     return False
 
 def __matches(element, pattern):
-    if element == pattern:
-        return True
+    if not isinstance(element, list) and not isinstance(element, dict):
+        if element == pattern:
+            return True
+        elif type(pattern) == str and type(element) == str:
+            if (re.match(pattern, element)):
+                return True
+
     return False

@@ -26,5 +26,9 @@ class TestContainsMatcher(unittest.TestCase):
         self.assertFalse(contains({ "key" : "value" }, [ "not_key", "value" ]))
         self.assertFalse(contains({ "key" : "value" }, [ "key", "not_value" ]))
 
+    def test_regex_matching(self):
+        self.assertTrue(contains([ "value" ], [ "val[u]e" ]))
+        self.assertFalse(contains([ "value" ], [ "valx*e" ]))
+
 if __name__ == '__main__':
     unittest.main()
